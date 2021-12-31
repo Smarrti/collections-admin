@@ -1,6 +1,8 @@
-import { Grid } from "@mui/material";
+import { createContext } from "react";
 import styled from "styled-components";
-import { Sidebar } from "./ui/sidebar";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "./config";
+import { RootGrid } from "./ui/rootGrid";
 
 const Root = styled("div")`
   width: 100%;
@@ -8,15 +10,15 @@ const Root = styled("div")`
 `;
 
 function App() {
+  const app = initializeApp(firebaseConfig);
+  const FirebaseContext = createContext(app);
+
   return (
-    <Root>
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={12} />
-      </Grid>
-    </Root>
+    <FirebaseContext.Provider value={app}>
+      <Root>
+        <RootGrid />
+      </Root>
+    </FirebaseContext.Provider>
   );
 }
 
