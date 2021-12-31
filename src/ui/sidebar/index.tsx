@@ -1,19 +1,17 @@
 import { Box } from "@mui/material";
 import styled from "styled-components";
 import { Logo } from "./logo";
+import { MenuLinks } from "./menuLinks";
 
-const Image = styled("img")`
-  width: 100px;
-  height: 100px;
+const Root = styled(Box)`
+  height: 100%;
 `;
 
 export const Sidebar = () => {
   return (
-    <Box
-      sx={{ borderRight: 1, borderColor: "grey.200" }}
-      style={{ height: "100vh" }}
-    >
+    <Root sx={{ borderRight: 1, borderColor: "grey.200" }}>
       <Logo />
-    </Box>
+      <MenuLinks />
+    </Root>
   );
 };

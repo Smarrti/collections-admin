@@ -3,11 +3,7 @@ import styled from "styled-components";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config";
 import { RootGrid } from "./ui/rootGrid";
-
-const Root = styled("div")`
-  width: 100%;
-  min-height: 100vh;
-`;
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   const app = initializeApp(firebaseConfig);
@@ -15,9 +11,9 @@ function App() {
 
   return (
     <FirebaseContext.Provider value={app}>
-      <Root>
+      <BrowserRouter>
         <RootGrid />
-      </Root>
+      </BrowserRouter>
     </FirebaseContext.Provider>
   );
 }

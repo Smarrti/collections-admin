@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Root = styled("div")`
   display: flex;
   padding-top: 50px;
-  padding-left: 40px;
+  padding-left: 50px;
 `;
 
 const Image = styled("img")`
