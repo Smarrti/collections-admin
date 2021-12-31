@@ -11,7 +11,7 @@ const GridContent = styled(Grid)`
 
 export const RootGrid: FC = ({}) => {
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Grid item xs={3}>
         <Sidebar />
       </Grid>
