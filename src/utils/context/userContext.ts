@@ -1,4 +1,4 @@
-import { User } from "firebase/auth";
 import { createContext } from "react";
+import { UserInfo } from "../types/userInfo.type";
 
-export const UserContext = createContext<User | null>(null);
+export const UserContext = createContext<UserInfo | undefined>(undefined);

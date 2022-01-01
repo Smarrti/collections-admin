@@ -2,7 +2,7 @@ import { ListItemText, MenuItem, MenuList } from "@mui/material";
 import { FC, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { anonymRoutes, routes } from "../../../routes";
+import { determineRoutes } from "../../../routes";
 import { UserContext } from "../../../utils/context/userContext";
 
 const Root = styled(MenuList)`
@@ -17,9 +17,7 @@ const StyledLink = styled(Link)`
 export const MenuLinks: FC = () => {
   const user = useContext(UserContext);
 
-  const links = user !== null ? routes : anonymRoutes;
-
-  debugger;
+  const links = determineRoutes(user);
 
   return (
     <Root>

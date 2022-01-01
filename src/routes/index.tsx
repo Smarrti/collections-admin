@@ -1,7 +1,10 @@
 import { FC, useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Main } from "../modules/main";
 import { SignIn } from "../modules/signin";
+import { SignOut } from "../modules/signOut";
 import { UserContext } from "../utils/context/userContext";
+import { UserInfo } from "../utils/types/userInfo.type";
 
 export const anonymRoutes = [
   {
@@ -12,12 +15,27 @@ export const anonymRoutes = [
   },
 ];
 
-export const routes = [
+export const notGrantedRoutes = [
   {
     id: 1,
     title: "Главная",
     path: "/",
-    element: <div>Главная</div>,
+    element: <Main />,
+  },
+  {
+    id: 2,
+    title: "Выйти",
+    path: "/signOut",
+    element: <SignOut />,
+  },
+];
+
+export const grantedRoutes = [
+  {
+    id: 1,
+    title: "Главная",
+    path: "/",
+    element: <Main />,
   },
   {
     id: 2,
@@ -31,12 +49,30 @@ export const routes = [
     path: "/notes",
     element: <div>Ноты</div>,
   },
+  {
+    id: 4,
+    title: "Выйти",
+    path: "/signOut",
+    element: <SignOut />,
+  },
 ];
+
+export const determineRoutes = (user: UserInfo | undefined) => {
+  if (user && user.role === "user") {
+    return notGrantedRoutes;
+  }
+
+  if (user && user.role === "editor") {
+    return grantedRoutes;
+  }
+
+  return anonymRoutes;
+};
 
 export const RoutesScreen: FC = () => {
   const user = useContext(UserContext);
 
-  const links = user !== null ? routes : anonymRoutes;
+  const links = determineRoutes(user);
 
   return (
     <Routes>

@@ -1,4 +1,4 @@
 import { FirebaseApp } from "firebase/app";
 import { createContext } from "react";
 
-export const FirebaseContext = createContext<FirebaseApp | object>({});
+export const FirebaseContext = createContext<FirebaseApp | null>(null);
