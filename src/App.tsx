@@ -14,6 +14,7 @@ function App() {
 
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
+  // console.log(import.meta.env);
 
   onAuthStateChanged(auth, async (userAuth) => {
     if (!userAuth) {
