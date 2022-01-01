@@ -6,13 +6,11 @@ type Props = {};
 
 const Root = styled(MPaper)`
   margin-bottom: 30px;
+  min-width: 400px;
+  min-height: 50px;
 `;
 
 const Container = styled("div")`
-  max-width: 700px;
-  min-width: 400px;
-  width: 700px;
-  min-height: 50px;
   padding: 30px;
 `;
 
