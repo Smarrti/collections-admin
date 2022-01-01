@@ -1,7 +1,7 @@
-// import { firebaseApiKey } from "./apiKeys";
+const apiKey = import.meta.env.VITE_FIREBASE_API_KEY;
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: `${apiKey}`,
   authDomain: "collectionsofchristians.firebaseapp.com",
   databaseURL: "https://collectionsofchristians-default-rtdb.firebaseio.com",
   projectId: "collectionsofchristians",
