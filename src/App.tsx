@@ -23,6 +23,8 @@ function App() {
     }
 
     const user = await checkUser(userAuth, app);
+
+    // @ts-ignore
     setUserInfo(user);
   });
 
