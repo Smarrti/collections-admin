@@ -1,7 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import { Form, FormikProps } from "formik";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
+import { IdListInfo } from "../../../modules/video/ui/idListInfo";
 import { searchSongFormType } from "../../../modules/video/ui/searchSongForm";
 
 type Props = {
@@ -19,27 +20,34 @@ const StyledForm = styled(Form)`
 `;
 
 export const FormFieldsContent: FC<Props> = ({ formikBag }) => {
+  const [idVisible, setIdVisible] = useState(false);
   const { values, setFieldValue } = formikBag;
 
+  const toggleList = () => setIdVisible((value) => !value);
+
   return (
-    <StyledForm>
-      <StyledTextField
-        id="collectionId"
-        label="ID сборника"
-        variant="outlined"
-        type="number"
-        value={values.collectionId}
-        onChange={(e) => setFieldValue("collectionId", e.target.value)}
-      />
-      <StyledTextField
-        id="songId"
-        label="Номер песни"
-        variant="outlined"
-        type="number"
-        value={values.songId}
-        onChange={(e) => setFieldValue("songId", e.target.value)}
-      />
-      <Button type="submit">Поиск</Button>
-    </StyledForm>
+    <div>
+      <StyledForm>
+        <StyledTextField
+          id="collectionId"
+          label="ID сборника"
+          variant="outlined"
+          type="number"
+          value={values.collectionId}
+          onChange={(e) => setFieldValue("collectionId", e.target.value)}
+        />
+        <StyledTextField
+          id="songId"
+          label="Номер песни"
+          variant="outlined"
+          type="number"
+          value={values.songId}
+          onChange={(e) => setFieldValue("songId", e.target.value)}
+        />
+        <Button type="submit">Поиск</Button>
+        <Button onClick={toggleList}>Список ID</Button>
+      </StyledForm>
+      {idVisible && <IdListInfo />}
+    </div>
   );
 };
