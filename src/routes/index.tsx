@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { Main } from "../modules/main";
 import { SignIn } from "../modules/signin";
 import { SignOut } from "../modules/signOut";
+import { Video } from "../modules/video";
 import { UserContext } from "../utils/context/userContext";
 import { UserInfo } from "../utils/types/userInfo.type";
 
@@ -12,6 +13,12 @@ export const anonymRoutes = [
     title: "Войти",
     path: "/",
     element: <SignIn />,
+  },
+  {
+    id: 2,
+    title: "Видео",
+    path: "/videos",
+    element: <Video />,
   },
 ];
 
@@ -41,7 +48,7 @@ export const grantedRoutes = [
     id: 2,
     title: "Видео",
     path: "/videos",
-    element: <div>Видео</div>,
+    element: <Video />,
   },
   {
     id: 3,
