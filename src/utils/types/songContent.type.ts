@@ -1,3 +1,8 @@
+export type VideoContentType = {
+  source: string;
+  id: string;
+};
+
 export type SongContentType = {
   bookId: number;
   songId: number;
@@ -10,8 +15,5 @@ export type SongContentType = {
     url: string;
     title: string;
   }[];
-  videosId: {
-    source: string;
-    url: string;
-  }[];
+  videosId: VideoContentType[];
 };

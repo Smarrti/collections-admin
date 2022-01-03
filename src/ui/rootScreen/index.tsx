@@ -8,13 +8,12 @@ type Props = {
 };
 
 const Root = styled(Box)`
-  max-height: 100%;
-  height: 100%;
   background-color: ${grey[100]};
   display: flex;
   flex-direction: column;
   padding: 50px 90px 0;
   overflow-y: scroll;
+  min-height: 100vh;
 `;
 
 export const RootScreen: FC<Props> = ({ children }) => {

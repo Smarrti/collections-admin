@@ -14,12 +14,6 @@ export const anonymRoutes = [
     path: "/",
     element: <SignIn />,
   },
-  {
-    id: 2,
-    title: "Видео",
-    path: "/videos",
-    element: <Video />,
-  },
 ];
 
 export const notGrantedRoutes = [
