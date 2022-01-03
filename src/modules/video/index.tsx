@@ -14,7 +14,7 @@ const StyledTypography = styled(Typography)`
 
 export const Video: FC = ({}) => {
   const [searchResult, setSearchResult] = useState<
-    SongContentType | undefined | "loading"
+    SongContentType | undefined | "loading" | "not found"
   >();
 
   return (
@@ -24,7 +24,9 @@ export const Video: FC = ({}) => {
         <SearchSongForm setSearchResult={setSearchResult} />
       </Paper>
 
-      {searchResult && <AddVideoForm searchResult={searchResult} />}
+      {searchResult && searchResult !== "not found" && (
+        <AddVideoForm searchResult={searchResult} />
+      )}
       {searchResult && <SongVideos searchResult={searchResult} />}
     </RootScreen>
   );

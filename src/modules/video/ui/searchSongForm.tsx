@@ -13,7 +13,7 @@ import { SongContentType } from "../../../utils/types/songContent.type";
 
 type Props = {
   setSearchResult: React.Dispatch<
-    React.SetStateAction<SongContentType | undefined | "loading">
+    React.SetStateAction<SongContentType | undefined | "loading" | "not found">
   >;
 };
 
@@ -44,7 +44,6 @@ export const SearchSongForm: FC<Props> = ({ setSearchResult }) => {
 
       const querySnapshot = await getDocs(q);
       const queryResult: SongContentType[] = [];
-      debugger;
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         const result = {
@@ -58,7 +57,11 @@ export const SearchSongForm: FC<Props> = ({ setSearchResult }) => {
         };
         queryResult.push(result);
       });
-      setSearchResult(queryResult[0]);
+      if (queryResult.length) {
+        setSearchResult(queryResult[0]);
+      } else {
+        setSearchResult("not found");
+      }
     } catch {
       setSearchResult(undefined);
     }

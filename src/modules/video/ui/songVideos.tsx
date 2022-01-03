@@ -6,7 +6,7 @@ import { SongContentType } from "../../../utils/types/songContent.type";
 import { VideoIframe } from "./videoIframe";
 
 type Props = {
-  searchResult: SongContentType | "loading";
+  searchResult: SongContentType | "loading" | "not found";
 };
 
 export type addVideoFormValues = {
@@ -32,6 +32,14 @@ export const SongVideos: FC<Props> = ({ searchResult }) => {
         <Skeleton variant="text" height={50} />
         <Skeleton variant="rectangular" height={300} />
         <Skeleton variant="rectangular" height={300} />
+      </Paper>
+    );
+  }
+
+  if (searchResult === "not found") {
+    return (
+      <Paper>
+        <Typography>Ничего не найдено</Typography>
       </Paper>
     );
   }
