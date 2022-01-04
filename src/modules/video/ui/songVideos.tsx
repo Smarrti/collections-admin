@@ -48,7 +48,7 @@ export const SongVideos: FC<Props> = ({ searchResult }) => {
     <Paper>
       <Typography variant="h5">Добавленные видео</Typography>
       {searchResult.videosId.map((item) => (
-        <VideoIframe video={item} />
+        <VideoIframe video={item} key={item.id} />
       ))}
     </Paper>
   );
