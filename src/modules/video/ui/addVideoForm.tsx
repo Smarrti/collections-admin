@@ -1,6 +1,12 @@
-import { Button, Skeleton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  Skeleton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { FieldArray, Form, Formik } from "formik";
-import { FC } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import { Paper } from "../../../ui/paper";
 import { SongContentType } from "../../../utils/types/songContent.type";
@@ -23,10 +29,11 @@ const StyledTextField = styled(TextField)`
 const FireldsRow = styled("div")`
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin: 10px 0;
 `;
 
 export const AddVideoForm: FC<Props> = ({ searchResult }) => {
+  const [isSubmitting, setIsSubmmitting] = useState(false);
   if (searchResult === "loading") {
     return (
       <Paper>
@@ -46,12 +53,15 @@ export const AddVideoForm: FC<Props> = ({ searchResult }) => {
     ],
   };
 
-  const onSubmit = (values: addVideoFormValues) => {
+  const onSubmit = async (values: addVideoFormValues) => {
+    setIsSubmmitting(true);
     console.log(values);
+    // setIsSubmmitting(false);
   };
 
   return (
     <Paper>
+      {isSubmitting && <CircularProgress />}
       <Typography variant="h5">Результат поиска</Typography>
       <Typography style={{ marginTop: 10 }}>{searchResult.title}</Typography>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -72,6 +82,7 @@ export const AddVideoForm: FC<Props> = ({ searchResult }) => {
                           onChange={(e) =>
                             setFieldValue(`videos[${index}].id`, e.target.value)
                           }
+                          disabled={isSubmitting}
                         />
                         <StyledTextField
                           id={`video-${index}`}
@@ -85,8 +96,13 @@ export const AddVideoForm: FC<Props> = ({ searchResult }) => {
                               e.target.value
                             )
                           }
+                          disabled={isSubmitting}
                         />
-                        <Button type="button" onClick={() => remove(index)}>
+                        <Button
+                          type="button"
+                          onClick={() => remove(index)}
+                          disabled={isSubmitting}
+                        >
                           Удалить
                         </Button>
                       </FireldsRow>
@@ -95,13 +111,16 @@ export const AddVideoForm: FC<Props> = ({ searchResult }) => {
                     type="button"
                     className="secondary"
                     onClick={() => push({ id: "", title: "" })}
+                    disabled={isSubmitting}
                   >
                     Добавить еще
                   </Button>
                 </div>
               )}
             </FieldArray>
-            <Button type="submit">Отправить</Button>
+            <Button type="submit" disabled={isSubmitting}>
+              Отправить
+            </Button>
           </Form>
         )}
       </Formik>
