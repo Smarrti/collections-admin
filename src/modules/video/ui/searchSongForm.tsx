@@ -15,6 +15,7 @@ type Props = {
   setSearchResult: React.Dispatch<
     React.SetStateAction<SongContentType | undefined | "loading" | "not found">
   >;
+  setSearchResultId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export type searchSongFormType = {
@@ -22,7 +23,10 @@ export type searchSongFormType = {
   songId: string;
 };
 
-export const SearchSongForm: FC<Props> = ({ setSearchResult }) => {
+export const SearchSongForm: FC<Props> = ({
+  setSearchResult,
+  setSearchResultId,
+}) => {
   const fireApp = useContext(FirebaseContext);
   const initialValues: searchSongFormType = {
     collectionId: "",
@@ -46,23 +50,31 @@ export const SearchSongForm: FC<Props> = ({ setSearchResult }) => {
       const queryResult: SongContentType[] = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
+
         const result = {
           ...data,
+          id: doc.id,
           title: data.title,
           bookId: data.bookId,
-          songId: data.songId,
+          songNumber: data.songNumber,
           notesSources: data.notesSources,
           notes: data.notes,
           videosId: data.videosId,
         };
+        // @ts-ignore
+
         queryResult.push(result);
       });
       if (queryResult.length) {
         setSearchResult(queryResult[0]);
+        // @ts-ignore
+        setSearchResultId(queryResult[0].id);
       } else {
+        setSearchResultId(null);
         setSearchResult("not found");
       }
     } catch {
+      setSearchResultId(null);
       setSearchResult(undefined);
     }
   };

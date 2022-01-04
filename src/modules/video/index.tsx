@@ -16,16 +16,24 @@ export const Video: FC = ({}) => {
   const [searchResult, setSearchResult] = useState<
     SongContentType | undefined | "loading" | "not found"
   >();
+  const [searchResultId, setSearchResultId] = useState<string | null>(null);
 
   return (
     <RootScreen>
       <Paper>
         <StyledTypography variant="h5">Видео</StyledTypography>
-        <SearchSongForm setSearchResult={setSearchResult} />
+        <SearchSongForm
+          setSearchResult={setSearchResult}
+          setSearchResultId={setSearchResultId}
+        />
       </Paper>
 
       {searchResult && searchResult !== "not found" && (
-        <AddVideoForm searchResult={searchResult} />
+        <AddVideoForm
+          searchResult={searchResult}
+          searchResultId={searchResultId}
+          setSearchResultId={setSearchResultId}
+        />
       )}
       {searchResult && <SongVideos searchResult={searchResult} />}
     </RootScreen>
