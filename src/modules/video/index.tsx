@@ -5,7 +5,7 @@ import { Paper } from "../../ui/paper";
 import { RootScreen } from "../../ui/rootScreen";
 import { SongContentType } from "../../utils/types/songContent.type";
 import { AddVideoForm } from "./ui/addVideoForm";
-import { SearchSongForm } from "./ui/searchSongForm";
+import { SearchSongForm } from "../../ui/searchSongForm";
 import { SongVideos } from "./ui/songVideos";
 
 const StyledTypography = styled(Typography)`

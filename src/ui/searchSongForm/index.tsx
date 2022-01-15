@@ -7,9 +7,9 @@ import {
 } from "firebase/firestore";
 import { Formik } from "formik";
 import React, { FC, useContext } from "react";
-import { FormFieldsContent } from "../../../ui/forms/searchSongForm";
-import { FirebaseContext } from "../../../utils/context/firebaseContext";
-import { SongContentType } from "../../../utils/types/songContent.type";
+import { FormFieldsContent } from "../forms/searchSongForm";
+import { FirebaseContext } from "../../utils/context/firebaseContext";
+import { SongContentType } from "../../utils/types/songContent.type";
 
 type Props = {
   setSearchResult: React.Dispatch<

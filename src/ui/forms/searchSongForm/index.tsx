@@ -3,7 +3,7 @@ import { Form, FormikProps } from "formik";
 import { FC, useState } from "react";
 import styled from "styled-components";
 import { IdListInfo } from "../../../modules/video/ui/idListInfo";
-import { searchSongFormType } from "../../../modules/video/ui/searchSongForm";
+import { searchSongFormType } from "../../searchSongForm";
 
 type Props = {
   formikBag: FormikProps<searchSongFormType>;
