@@ -1,5 +1,5 @@
 export type VideoContentType = {
-  source: string;
+  title: string;
   id: string;
 };
 

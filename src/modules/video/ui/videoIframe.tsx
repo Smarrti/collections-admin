@@ -11,7 +11,7 @@ export const VideoIframe: FC<Props> = ({ video }) => {
 
   return (
     <div>
-      <Typography style={{ marginTop: 10 }}>Источник {video.source}</Typography>
+      <Typography style={{ marginTop: 10 }}>Источник {video.title}</Typography>
 
       <iframe
         src={videoUrl}
