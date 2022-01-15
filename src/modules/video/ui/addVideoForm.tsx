@@ -73,7 +73,8 @@ export const AddVideoForm: FC<Props> = ({
       const db = getFirestore();
 
       const docReference = doc(db, "songsOfflineContent", searchResultId);
-
+      console.log('2');
+      
       await updateDoc(docReference, {
         ...searchResult,
         videosId: [...searchResult.videosId, ...values.videos],

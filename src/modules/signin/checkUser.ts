@@ -17,6 +17,8 @@ export const checkUser = async (userInfo: User, fireApp: FirebaseApp) => {
       mail: userInfo.email,
       role: "user",
     };
+    console.log('1');
+    
     await setDoc(doc(db, "users", userInfo.uid), newUser);
 
     return newUser;
