@@ -4,6 +4,7 @@ import { Main } from "../modules/main";
 import { SignIn } from "../modules/signin";
 import { SignOut } from "../modules/signOut";
 import { Video } from "../modules/video";
+import { Notes } from "../modules/notes";
 import { UserContext } from "../utils/context/userContext";
 import { UserInfo } from "../utils/types/userInfo.type";
 
@@ -48,7 +49,7 @@ export const grantedRoutes = [
     id: 3,
     title: "Ноты",
     path: "/notes",
-    element: <div>Ноты</div>,
+    element: <Notes />,
   },
   {
     id: 4,

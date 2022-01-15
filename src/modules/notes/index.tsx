@@ -3,16 +3,16 @@ import { FC, useState } from "react";
 import styled from "styled-components";
 import { Paper } from "../../ui/paper";
 import { RootScreen } from "../../ui/rootScreen";
-import { SongContentType } from "../../utils/types/songContent.type";
-import { AddVideoForm } from "./ui/addVideoForm";
 import { SearchSongForm } from "../../ui/searchSongForm";
-import { SongVideos } from "./ui/songVideos";
+import { SongContentType } from "../../utils/types/songContent.type";
+import { AddNotesForm } from "./ui/addNotesForm";
+import { NotesList } from "./ui/notesList";
 
 const StyledTypography = styled(Typography)`
   margin-bottom: 20px;
 `;
 
-export const Video: FC = ({}) => {
+export const Notes: FC = ({}) => {
   const [searchResult, setSearchResult] = useState<
     SongContentType | undefined | "loading" | "not found"
   >();
@@ -21,7 +21,7 @@ export const Video: FC = ({}) => {
   return (
     <RootScreen>
       <Paper>
-        <StyledTypography variant="h5">Видео</StyledTypography>
+        <StyledTypography variant="h5">Ноты</StyledTypography>
         <SearchSongForm
           setSearchResult={setSearchResult}
           setSearchResultId={setSearchResultId}
@@ -29,12 +29,13 @@ export const Video: FC = ({}) => {
       </Paper>
 
       {searchResult && searchResult !== "not found" && (
-        <AddVideoForm
+        <AddNotesForm
           searchResult={searchResult}
           searchResultId={searchResultId}
         />
       )}
-      {searchResult && <SongVideos searchResult={searchResult} />}
+
+      {searchResult && <NotesList searchResult={searchResult} />}
     </RootScreen>
   );
 };

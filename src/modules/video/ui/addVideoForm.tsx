@@ -15,7 +15,6 @@ import { doc, getFirestore, updateDoc } from "firebase/firestore";
 type Props = {
   searchResult: SongContentType | "loading";
   searchResultId: string | null;
-  setSearchResultId: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
 export type addVideoFormValues = {
@@ -35,11 +34,7 @@ const FireldsRow = styled("div")`
   margin: 10px 0;
 `;
 
-export const AddVideoForm: FC<Props> = ({
-  searchResult,
-  searchResultId,
-  setSearchResultId,
-}) => {
+export const AddVideoForm: FC<Props> = ({ searchResult, searchResultId }) => {
   const [isSubmitting, setIsSubmmitting] = useState(false);
   if (searchResult === "loading") {
     return (
@@ -73,8 +68,7 @@ export const AddVideoForm: FC<Props> = ({
       const db = getFirestore();
 
       const docReference = doc(db, "songsOfflineContent", searchResultId);
-      console.log('2');
-      
+
       await updateDoc(docReference, {
         ...searchResult,
         videosId: [...searchResult.videosId, ...values.videos],
