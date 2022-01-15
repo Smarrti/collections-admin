@@ -9,7 +9,13 @@ export const checkUser = async (userInfo: User, fireApp: FirebaseApp) => {
   const userDoc = await (await getDoc(docRef)).data();
 
   if (userDoc) {
-    return userDoc;
+    return {
+      ...userDoc,
+      uid: userDoc.uid,
+      name: userDoc.name,
+      mail: userDoc.mail,
+      role: userDoc.role,
+    };
   } else {
     const newUser = {
       uid: userInfo.uid,
@@ -17,7 +23,6 @@ export const checkUser = async (userInfo: User, fireApp: FirebaseApp) => {
       mail: userInfo.email,
       role: "user",
     };
-    console.log('1');
     
     await setDoc(doc(db, "users", userInfo.uid), newUser);
 

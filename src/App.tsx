@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config";
 import { RootGrid } from "./ui/rootGrid";
 import { BrowserRouter } from "react-router-dom";
 import { FirebaseContext } from "./utils/context/firebaseContext";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { UserContext } from "./utils/context/userContext";
 import { checkUser } from "./modules/signin/checkUser";
 import { UserInfo } from "./utils/types/userInfo.type";
@@ -15,22 +15,23 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
 
-  onAuthStateChanged(auth, async (userAuth) => {
-    if (!userAuth) {
-      setUserInfo(undefined);
+  useEffect(() => {
+    const asyncEffect = async () => {
+      if (!auth.currentUser) {
+        return
+      }
 
-      return;
+      const userInfo = await checkUser(auth.currentUser, app)
+      setUserInfo(userInfo)
     }
 
-    const user = await checkUser(userAuth, app);
+    asyncEffect()
+  }, [])
 
-    // @ts-ignore
-    setUserInfo(user);
-  });
 
   return (
     <FirebaseContext.Provider value={app}>
-      <UserContext.Provider value={userInfo}>
+      <UserContext.Provider value={{userInfo, setUserInfo}}>
         <BrowserRouter>
           <RootGrid />
         </BrowserRouter>

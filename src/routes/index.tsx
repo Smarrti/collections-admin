@@ -73,7 +73,7 @@ export const determineRoutes = (user: UserInfo | undefined) => {
 export const RoutesScreen: FC = () => {
   const user = useContext(UserContext);
 
-  const links = determineRoutes(user);
+  const links = determineRoutes(user?.userInfo);
 
   return (
     <Routes>

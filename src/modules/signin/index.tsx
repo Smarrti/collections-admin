@@ -1,9 +1,12 @@
 import { Button, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
 import { Paper } from "../../ui/paper";
 import { RootScreen } from "../../ui/rootScreen";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { UserContext } from "../../utils/context/userContext";
+import { checkUser } from "./checkUser";
+import { FirebaseContext } from "../../utils/context/firebaseContext";
 
 const ButtonContainer = styled("div")`
   display: flex;
@@ -12,11 +15,20 @@ const ButtonContainer = styled("div")`
 `;
 
 export const SignIn: FC = () => {
+  const userContext = useContext(UserContext)
+  const firebaseContext = useContext(FirebaseContext)
+
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
-  const handleClick = () => {
-    signInWithPopup(auth, provider);
+  const handleClick = async () => {
+    if (!firebaseContext) {
+      return
+    }
+
+    const { user } = await signInWithPopup(auth, provider);
+    const userInfo = await checkUser(user, firebaseContext)
+    userContext?.setUserInfo(userInfo)
   };
 
   return (

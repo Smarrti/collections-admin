@@ -47,13 +47,10 @@ export const SearchSongForm: FC<Props> = ({
       );
 
       const querySnapshot = await getDocs(q);
-      console.log(3);
       
       const queryResult: SongContentType[] = [];
-      querySnapshot.forEach((doc, id) => {
+      querySnapshot.forEach((doc) => {
         const data = doc.data();
-        console.log('rr', id);
-        
 
         const result = {
           ...data,

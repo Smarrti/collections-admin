@@ -17,7 +17,7 @@ const StyledLink = styled(Link)`
 export const MenuLinks: FC = () => {
   const user = useContext(UserContext);
 
-  const links = determineRoutes(user);
+  const links = determineRoutes(user?.userInfo);
 
   return (
     <Root>
